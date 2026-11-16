@@ -11,7 +11,7 @@ export MEET_DATABASE=meet.sqlite3
 python server.py
 ```
 
-The development service listens only on `127.0.0.1:8102`. No browser workspace or production deployment is included yet. Keep the owner key private. All credentials must be sent as `Authorization: Bearer <key>`; query-string keys are not accepted. The database stores hashed invite and participant secrets, never the owner key.
+The development service listens only on `127.0.0.1:8102`. The English browser workspace is available at the root URL; production deployment is not included yet. Keep the owner key private. All credentials must be sent as `Authorization: Bearer <key>`; query-string keys are not accepted. The database stores hashed invite and participant secrets, never the owner key.
 
 | Route | Credential | Behavior |
 | --- | --- | --- |
@@ -34,4 +34,4 @@ Each vote list must contain one `yes`, `maybe` or `no` for every slot. Proposed 
 
 Requests are limited to 64 KiB. Missing/wrong owner or invitation credentials return 401. Domain validation (including rejected participant updates, finalized polls and missing records) returns 400. Invalid content types return 415; oversized requests 413; storage unavailability 503. Errors are JSON. Responses disable caching, framing and referrer disclosure; no CORS is enabled.
 
-Tests cover the HTTP workflow using Flask's test client. Actual browser acceptance, calendar-client import, six-language UI, persistent deployment/restore and public HTTPS remain pending. No remote access or public publication is configured.
+Tests cover the HTTP workflow using Flask's test client. Calendar-client import, six-language UI, persistent deployment/restore and public HTTPS remain pending. No remote access or public publication is configured.

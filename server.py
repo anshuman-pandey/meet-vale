@@ -6,7 +6,7 @@ from polls import Polls,Invalid
 
 def create_app(path,owner_key,clock=time.time):
     if not isinstance(owner_key,str) or not owner_key.isascii() or len(owner_key)<32:raise ValueError('Set MEET_OWNER_KEY to at least 32 random ASCII characters.')
-    app=Flask(__name__,static_folder=None);app.config['MAX_CONTENT_LENGTH']=65536
+    app=Flask(__name__);app.config['MAX_CONTENT_LENGTH']=65536
     def db():
         if 'db' not in g:g.db=Polls(path,clock)
         return g.db
@@ -27,13 +27,15 @@ def create_app(path,owner_key,clock=time.time):
         if store:store.close()
     @app.after_request
     def headers(r):
-        r.headers.update({'Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Referrer-Policy':'no-referrer','Content-Security-Policy':"default-src 'none'; frame-ancestors 'none'; base-uri 'none'"});return r
+        r.headers.update({'Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Referrer-Policy':'no-referrer','Content-Security-Policy':"default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; form-action 'self'; frame-ancestors 'none'; base-uri 'none'"});return r
     @app.errorhandler(Invalid)
     def invalid(e):return jsonify(error=str(e)),400
     @app.errorhandler(HTTPException)
     def http_error(e):return jsonify(error=e.description),e.code
     @app.errorhandler(sqlite3.OperationalError)
     def storage(e):return jsonify(error='Storage unavailable. Please retry.'),503
+    @app.get('/')
+    def home():return app.send_static_file('index.html')
     @app.get('/api/polls')
     def listing():
         owner();return jsonify([dict(r) for r in db().db.execute('SELECT id,title,zone,final FROM polls ORDER BY rowid DESC')])

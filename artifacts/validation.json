@@ -1,13 +1,13 @@
 {
-  "checked_at": "2026-11-16T18:41:58.927508+00:00",
-  "state": "local incomplete API preview",
+  "checked_at": "2026-11-16T19:37:20.106975+00:00",
+  "state": "local English browser preview",
   "tests": "20 tests pass: 12 domain and 8 HTTP integration tests, owner/invite/participant separation, scoped updates, frozen final choice, ICS attachment, secret exclusion and request validation",
   "pending": [
-    "Owner/guest browser workflow",
     "Six languages",
     "Actual calendar-client import",
     "Persistent deployment/recovery",
     "Owner publication approval and HTTPS"
   ],
-  "published": false
+  "published": false,
+  "browser": "Chromium create/literal title/timezone display and answer preservation/guest response/private update/counts/finalization/UTC ICS bytes/390px acceptance passed; desktop/mobile screenshots inspected. Incorrect selector found and fixed."
 }
