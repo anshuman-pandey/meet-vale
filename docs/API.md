@@ -34,4 +34,4 @@ Each vote list must contain one `yes`, `maybe` or `no` for every slot. Proposed 
 
 Requests are limited to 64 KiB. Missing/wrong owner or invitation credentials return 401. Domain validation (including rejected participant updates, finalized polls and missing records) returns 400. Invalid content types return 415; oversized requests 413; storage unavailability 503. Errors are JSON. Responses disable caching, framing and referrer disclosure; no CORS is enabled.
 
-Tests cover the HTTP workflow using Flask's test client. Calendar-client import, six-language UI, public HTTPS remain pending. No remote access or public publication is configured.
+Tests cover the HTTP workflow using Flask's test client. Khal calendar import is verified in [CALENDAR.md](CALENDAR.md). Six-language UI and public HTTPS remain pending. No remote access or public publication is configured.
