@@ -2,3 +2,5 @@
 
 header{flex-wrap:wrap}header select{padding:8px;border:1px solid #b3c8d1;border-radius:7px;background:white;color:inherit;max-width:140px}
 body{background:#f2f5f0;color:#293f33}header a,.eyebrow{color:#426d4f}button{background:#426d4f}.secondary{color:#426d4f;background:#e8efe7}#detail,#shareBox{margin-top:26px}#polls button{display:block;width:100%;text-align:left;margin:8px 0;overflow-wrap:anywhere}.draft{border-top:1px solid #d9e2d7;padding:12px 0}.draft label{margin:10px 0}select{padding:10px;border:1px solid #b3c8b8;border-radius:7px;background:white;color:inherit}.row{flex-wrap:wrap}.row p{flex:1;min-width:180px}.row select{max-width:100%}.heading{gap:16px}.heading label{flex:1}#create>button{margin:8px 5px 0 0}
+
+header{flex-wrap:wrap}header select{max-width:140px}

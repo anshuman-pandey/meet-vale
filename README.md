@@ -2,7 +2,7 @@
 
 An open-source alternative for Doodle's group scheduling workflow, in preparation.
 
-Implemented locally: immutable proposed slots, guest yes/maybe/no responses, private participant update credentials, aggregate counts, one final choice and UTC iCalendar export. Local English owner/guest browser preview included; no hosted demo or public release yet.
+Implemented locally: immutable proposed slots, guest yes/maybe/no responses, private participant update credentials, aggregate counts, one final choice and UTC iCalendar export. Local English/Spanish owner/guest browser preview included; no hosted demo or public release yet.
 
 ![Meet Vale organizer workspace](docs/assets/workspace.png)
 
@@ -34,3 +34,5 @@ Browser acceptance uses Node.js, Playwright and Chromium against a disposable se
 ## Persistent local deployment
 
 [Docker setup, backup and restore](docs/DEPLOYMENT.md) uses Waitress, a non-root/read-only container and a localhost port. Container acceptance verifies open-poll edits, frozen finalization, credentials and exact calendar bytes across restart and clean-volume restore. Public hosting remains unverified.
+
+The language selector supports English and Spanish with regional preference detection and saved choice when storage is available. Switching preserves drafts, times, guest answers and private links. User-authored names and titles remain literal. German, Japanese and both Chinese variants are pending; native-speaker review is not claimed. Run `MEET_URL=http://127.0.0.1:8102 node scripts/locales.cjs` against the disposable test server to reproduce locale acceptance.
