@@ -1,13 +1,13 @@
 {
-  "checked_at": "2026-11-16T19:37:20.106975+00:00",
+  "checked_at": "2026-11-16T20:39:10.999966+00:00",
   "state": "local English browser preview",
   "tests": "20 tests pass: 12 domain and 8 HTTP integration tests, owner/invite/participant separation, scoped updates, frozen final choice, ICS attachment, secret exclusion and request validation",
   "pending": [
     "Six languages",
     "Actual calendar-client import",
-    "Persistent deployment/recovery",
     "Owner publication approval and HTTPS"
   ],
   "published": false,
-  "browser": "Chromium create/literal title/timezone display and answer preservation/guest response/private update/counts/finalization/UTC ICS bytes/390px acceptance passed; desktop/mobile screenshots inspected. Incorrect selector found and fixed."
+  "browser": "Chromium create/literal title/timezone display and answer preservation/guest response/private update/counts/finalization/UTC ICS bytes/390px acceptance passed; desktop/mobile screenshots inspected. Incorrect selector found and fixed.",
+  "deployment": "Non-root/read-only Waitress container: votes, finalization, credentials and exact ICS survive restart/clean-volume restore; fresh edits/finalization/polls pass. Setup mode0600 and overwrite refusal; backup overwrite refusal pass."
 }
