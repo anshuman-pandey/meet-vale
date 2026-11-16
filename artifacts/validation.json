@@ -1,9 +1,8 @@
 {
-  "checked_at": "2026-11-16T17:41:42.492043+00:00",
-  "state": "local incomplete domain core",
-  "tests": "12 tests pass: votes, credentials, scope, atomic rejection, finalization, calendar bytes/folding/escaping, DST, persistence and past-slot rejection",
+  "checked_at": "2026-11-16T18:41:58.927508+00:00",
+  "state": "local incomplete API preview",
+  "tests": "20 tests pass: 12 domain and 8 HTTP integration tests, owner/invite/participant separation, scoped updates, frozen final choice, ICS attachment, secret exclusion and request validation",
   "pending": [
-    "Authenticated API",
     "Owner/guest browser workflow",
     "Six languages",
     "Actual calendar-client import",

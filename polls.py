@@ -53,7 +53,10 @@ CREATE TABLE IF NOT EXISTS guests(id TEXT PRIMARY KEY,poll TEXT NOT NULL REFEREN
         if not row or (token is not None and not hmac.compare_digest(row['invite'],digest(token))):raise Invalid('Poll unavailable.')
         return row
     def view(self,pid,token):
-        digest(token);r=self._poll(pid,token)
+        digest(token);self._poll(pid,token)
+        return self.report(pid)
+    def report(self,pid):
+        r=self._poll(pid)
         slots=json.loads(r['slots']);counts=[{'yes':0,'maybe':0,'no':0} for _ in slots]
         for row in self.db.execute('SELECT votes FROM guests WHERE poll=?',(pid,)):
             for i,v in enumerate(json.loads(row['votes'])):counts[i][v]+=1
