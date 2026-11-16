@@ -1,15 +1,18 @@
 {
-  "checked_at": "2026-11-16T22:42:35.352803+00:00",
-  "state": "local English/Spanish preview",
+  "checked_at": "2026-11-16T23:43:37.488626+00:00",
+  "state": "six-language source preview",
   "tests": "20 tests pass: 12 domain and 8 HTTP integration tests, owner/invite/participant separation, scoped updates, frozen final choice, ICS attachment, secret exclusion and request validation",
   "pending": [
-    "de, ja, zh-CN, zh-TW",
     "Native-speaker review",
-    "Owner publication approval and HTTPS"
+    "Public HTTPS acceptance"
   ],
   "published": false,
   "browser": "Chromium create/literal title/timezone display and answer preservation/guest response/private update/counts/finalization/UTC ICS bytes/390px acceptance passed; desktop/mobile screenshots inspected. Incorrect selector found and fixed.",
   "deployment": "Non-root/read-only Waitress container: votes, finalization, credentials and exact ICS survive restart/clean-volume restore; fresh edits/finalization/polls pass. Setup mode0600 and overwrite refusal; backup overwrite refusal pass.",
   "calendar": "Actual Khal 0.14.1 import passes: Unicode/escaped text, two repeated DST-hour slots retain distinct UTC instants, re-import keeps stable UID without duplication. Isolated local calendar only; other clients unverified.",
-  "locales": "English workflow and Spanish regional preference/persistence/blocked storage/translated error/proposed time/title/guest answer/private link/mobile acceptance pass; screenshot inspected."
+  "locales": "English full workflow plus es-MX, de-AT, ja-JP, zh-SG and zh-HK regional selection, persistence, blocked storage, translated errors, draft time/title preservation, literal content, guest answers/private links and 390px layout pass. German and Traditional Chinese screenshots inspected. Catalog key/placeholder parity and diagnostic fallback pass. Native-speaker review pending.",
+  "source_publication": {
+    "url": "https://github.com/anshuman-pandey/meet-vale",
+    "verified": true
+  }
 }

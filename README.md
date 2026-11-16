@@ -37,7 +37,7 @@ The app binds to localhost and stores data in a persistent Docker volume. Links 
 - Aggregate availability counts and separate private response-update credentials.
 - Calendar export with stable event identifiers and UTC times.
 
-**Interface languages:** English and Spanish. German, Japanese, Simplified Chinese and Traditional Chinese are planned. User-authored content is never translated.
+**Interface languages:** English, German, Spanish, Japanese, Simplified Chinese and Traditional Chinese. Native-speaker review remains pending. User-authored content is never translated.
 
 ## Know the boundaries
 
