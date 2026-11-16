@@ -1,10 +1,51 @@
 # Meet Vale
 
-An open-source alternative for Doodle's group scheduling workflow, in preparation.
+### Find a time without the timezone guesswork.
 
-Implemented locally: immutable proposed slots, guest yes/maybe/no responses, private participant update credentials, aggregate counts, one final choice and UTC iCalendar export. Local English/Spanish owner/guest browser preview included; no hosted demo or public release yet.
+Propose meeting times, collect yes/maybe/no responses, and export the final choice to a calendar. A focused, self-hosted alternative to Doodle for group availability polls.
 
-![Meet Vale organizer workspace](docs/assets/workspace.png)
+[![CI](https://github.com/anshuman-pandey/meet-vale/actions/workflows/test.yml/badge.svg)](https://github.com/anshuman-pandey/meet-vale/actions/workflows/test.yml) · [MIT license](LICENSE) · Python + SQLite · Self-hosted
+
+![Meet Vale: actual application workspace](docs/assets/workspace.png)
+
+**Public source preview.** The local workflow and container recovery have been tested. There is no hosted demo or tagged product release yet; public HTTPS acceptance remains pending.
+
+## How it works
+
+1. Create a poll with future slots in an IANA timezone and an explicit UTC offset.
+2. Share the poll. Guests respond yes, maybe or no and keep a private link to update their answers.
+3. Choose one final slot to freeze responses, then download an ICS calendar event.
+
+## Try it locally
+
+Requires Git, Python 3 and Docker with the Compose plugin.
+
+```sh
+git clone https://github.com/anshuman-pandey/meet-vale.git
+cd meet-vale
+python3 scripts/setup.py
+docker compose up --build -d
+```
+
+Open **http://127.0.0.1:8102**. Read the generated private `.env` file locally and use its `MEET_OWNER_KEY` value to unlock the owner workspace. Setup retains any existing `.env`; do not commit or share this file.
+
+The app binds to localhost and stores data in a persistent Docker volume. Links pointing to localhost work only on your computer. For remote sharing, follow the [HTTPS deployment and backup guide](docs/DEPLOYMENT.md). Avoid `docker compose down -v` unless you intend to delete the stored data.
+
+## Included
+
+- Daylight-saving gaps are rejected; repeated hours require an explicit offset.
+- Aggregate availability counts and separate private response-update credentials.
+- Calendar export with stable event identifiers and UTC times.
+
+**Interface languages:** English and Spanish. German, Japanese, Simplified Chinese and Traditional Chinese are planned. User-authored content is never translated.
+
+## Know the boundaries
+
+Up to 200 polls, 20 slots per poll and 100 participant records. Slots must be within 366 days, with durations from five minutes to 12 hours. Names are self-reported and one person can submit multiple responses. Calendar import was checked with Khal 0.14.1; other clients remain unverified. No calendar synchronization, email notifications, recurring meetings or account system.
+
+Private links and reviewer keys grant access to whoever holds them. Keep the owner key separate from participant credentials. This project covers the workflow above, not the full feature set of its commercial reference.
+
+## Development and checks
 
 ```sh
 python3 -m venv .venv
@@ -13,26 +54,10 @@ pip install -r requirements.txt
 python -m unittest discover -s tests -v
 ```
 
-Use Python 3.12 on Linux with system timezone data. The domain core uses the standard library; the HTTP service uses Flask. Proposed times require explicit offsets matching an IANA timezone. Nonexistent daylight-saving times are rejected; repeated local times are disambiguated by their offset. Slots must begin within 366 days and last 5 minutes to 12 hours.
+The published baseline passed **20 Python tests**. Recorded browser acceptance covers: poll creation, timezone/dst validation, guest responses, finalization and ics export/import. Container restart and clean-volume backup/restore were also checked. See the [validation record](artifacts/validation.json) for the exact evidence and remaining acceptance gates.
 
-Limits: 200 polls, 20 slots per poll, 100 participant records per poll. The invite secret grants poll viewing and participation; each participant gets a separate secret for updating only their own response. Secrets are hashed at rest. Display names are not verified identities, and people holding the invite can create multiple responses. Counts describe records, not verified unique people. Participant names are not exposed in the shared aggregate view.
+Bug reports should include reproduction steps and browser/runtime versions, with private keys and client data removed. Focused fixes and improvements are welcome through [issues](https://github.com/anshuman-pandey/meet-vale/issues) and pull requests.
 
-Finalization freezes responses and selects one future slot; calendar exports use stable event IDs, UTC times, escaped text and UTF-8 line folding. Actual import is verified with Khal 0.14.1; other calendar clients remain unverified. See [calendar acceptance](docs/CALENDAR.md). No email, calendar connection, notifications, recurring meetings, file attachments or Doodle feature parity is promised.
+## Documentation
 
-The included HTTP service authenticates owner operations and separates invite and participant credentials. [Run the local API](docs/API.md). Twenty domain/HTTP tests pass. The next steps are six interface languages and public HTTPS acceptance.
-
-[Scope and primary references](docs/SCOPE.md) · [MIT license](LICENSE)
-
-## Try the browser workflow
-
-Follow [local setup](docs/API.md), then open http://127.0.0.1:8102. Unlock with the owner key, propose times and save the invitation link. Open it in another tab to respond. Save the returned private update link to edit that response later. In the owner view, refresh counts and choose one final time; guests can then download the calendar file.
-
-The current time-entry form uses explicit ISO local times and UTC offsets, checked against the organizer timezone. Guests can change the display timezone without losing unsubmitted answers. Secrets are held in memory; link fragments are removed after loading. Keep the original invitation/update link to reopen after refresh. Localhost links work only on the same computer.
-
-Browser acceptance uses Node.js, Playwright and Chromium against a disposable server/database with `MEET_OWNER_KEY=meet-browser-test-key-000000000000000`: run `node scripts/browser.cjs`. Override `MEET_URL`, `MEET_TEST_KEY` or `CHROMIUM` as needed. It verifies creation, literal titles, timezone display, guest submission/private updates, counts, finalization, UTC calendar bytes and 390px layout. Actual Khal 0.14.1 import is verified separately; other calendar apps remain unverified.
-
-## Persistent local deployment
-
-[Docker setup, backup and restore](docs/DEPLOYMENT.md) uses Waitress, a non-root/read-only container and a localhost port. Container acceptance verifies open-poll edits, frozen finalization, credentials and exact calendar bytes across restart and clean-volume restore. Public hosting remains unverified.
-
-The language selector supports English and Spanish with regional preference detection and saved choice when storage is available. Switching preserves drafts, times, guest answers and private links. User-authored names and titles remain literal. German, Japanese and both Chinese variants are pending; native-speaker review is not claimed. Run `MEET_URL=http://127.0.0.1:8102 node scripts/locales.cjs` against the disposable test server to reproduce locale acceptance.
+[Deployment & backups](docs/DEPLOYMENT.md) · [Calendar guide](docs/CALENDAR.md) · [Api guide](docs/API.md) · [Scope & comparison](docs/SCOPE.md) · [Validation evidence](artifacts/validation.json) · [License](LICENSE)
