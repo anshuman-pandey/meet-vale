@@ -14,5 +14,28 @@
   "source_publication": {
     "url": "https://github.com/anshuman-pandey/meet-vale",
     "verified": true
+  },
+  "current_audit": {
+    "checked_at": "2026-11-26T13:36:59.571702+00:00",
+    "source_head": "21a8ebd94fecf24becd9787738ec254a19363d33",
+    "source_publication": "https://github.com/anshuman-pandey/meet-vale",
+    "source_public": true,
+    "ci": {
+      "conclusion": "success",
+      "headSha": "21a8ebd94fecf24becd9787738ec254a19363d33",
+      "status": "completed",
+      "url": "https://github.com/anshuman-pandey/meet-vale/actions/runs/43981842358"
+    },
+    "local_core_check": {
+      "exit": 0,
+      "summary": "----------------------------------------------------------------------\nRan 20 tests in 0.247s\n\nOK\n"
+    },
+    "release_urls": [],
+    "hosted_demo_url": null,
+    "remaining_gates": [
+      "Native-speaker review",
+      "Public HTTPS acceptance"
+    ],
+    "note": "Historical validation below is retained as dated evidence. Source publication does not establish a hosted deployment."
   }
 }
